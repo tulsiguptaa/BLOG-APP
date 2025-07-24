@@ -10,7 +10,6 @@ def subscribe():
     if not email:
         return jsonify({'error': 'Email is required'}), 400
 
-    # Check if already subscribed
     if Subscriber.query.filter_by(email=email).first():
         return jsonify({'message': 'Already subscribed'}), 200
 

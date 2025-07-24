@@ -31,7 +31,7 @@ const Post = () => {
                 })
                 .catch(() => setError("Failed to load post."))
                 .finally(() => setLoading(false));
-            // Fetch comments
+          
             setCommentsLoading(true);
             fetch(`http://localhost:5000/posts/${id}/comments`)
                 .then(res => res.json())
@@ -146,7 +146,7 @@ const Post = () => {
             setCommentSuccess("Comment added!");
             setCommentUsername("");
             setCommentContent("");
-            // Refresh comments
+     
             setCommentsLoading(true);
             fetch(`http://localhost:5000/posts/${id}/comments`)
                 .then(res => res.json())
@@ -207,8 +207,7 @@ const Post = () => {
                     )}
                 </form>
             </div>
-            <Footer />
-            {/* Comments Section (only show if editing/viewing a post) */}
+            <Footer /> 
             {id && (
                 <div className="login-container comments-section">
                     <h3 style={{ marginBottom: 12 }}>Comments</h3>
