@@ -41,7 +41,7 @@ def create_post():
     content = data.get('content') if data else None
     print("Title:", title)
     print("Content:", content)
-    user_id = get_jwt_identity()
+    user_id = int(get_jwt_identity())
     if not title or not content:
         return jsonify({'error': 'Title and content required.'}), 400
     post = Post(title=title, content=content, author_id=user_id)
@@ -56,7 +56,7 @@ def update_post(post_id):
     print("Headers:", dict(request.headers))
     print("JSON:", request.get_json())
     post = Post.query.get_or_404(post_id)
-    user_id = get_jwt_identity()
+    user_id = int(get_jwt_identity())
     print("[DEBUG] User ID from JWT:", user_id)
     print("[DEBUG] Post author ID:", post.author_id)
     if post.author_id != user_id:
@@ -71,15 +71,22 @@ def update_post(post_id):
 @posts_bp.route('/<int:post_id>', methods=['DELETE'])
 @jwt_required()
 def delete_post(post_id):
-    print("[DEBUG] DELETE /posts/<id> called")
-    print("Headers:", dict(request.headers))
+    print("\n===== [DEBUG] DELETE /posts/<post_id> =====")
+    print("[DEBUG] Request headers:", dict(request.headers))
+
     post = Post.query.get_or_404(post_id)
-    user_id = get_jwt_identity()
-    print("[DEBUG] User ID from JWT:", user_id)
-    print("[DEBUG] Post author ID:", post.author_id)
+
+    user_id = int(get_jwt_identity())   # <-- FIX HERE
+    print("[DEBUG] User ID from JWT (get_jwt_identity()):", user_id, type(user_id))
+    print("[DEBUG] Post author ID (from DB):", post.author_id, type(post.author_id))
+
     if post.author_id != user_id:
-        print("[DEBUG] Unauthorized: user is not the author.")
+        print("[DEBUG] Unauthorized: User is not the author of this post.")
+        print("==============================================\n")
         return jsonify({'error': 'Unauthorized.'}), 403
+
     db.session.delete(post)
     db.session.commit()
+    print("[DEBUG] Post deleted successfully.")
+    print("==============================================\n")
     return jsonify({'message': 'Post deleted.'})
