@@ -7,7 +7,7 @@
     border-top: 1.5px solid #23283a;
     position: fixed;
     left: 0;
-    bottom: 0;
+    bottom: -10px;
     z-index: 100;
 }
 

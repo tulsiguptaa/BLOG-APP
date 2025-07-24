@@ -72,7 +72,7 @@ const Post = () => {
                 return;
             }
             setSuccess(id ? "Post updated!" : "Post created!");
-            setTimeout(() => navigate("/"), 1200);
+            setTimeout(() => navigate("/blog"), 1200);
         } catch (err) {
             setError(err.message);
         } finally {
@@ -100,7 +100,7 @@ const Post = () => {
             });
             if (!res.ok) throw new Error("Failed to delete post.");
             setSuccess("Post deleted.");
-            setTimeout(() => navigate("/"), 1200);
+            setTimeout(() => navigate("/blog"), 1200);
         } catch (err) {
             setError(err.message);
         } finally {

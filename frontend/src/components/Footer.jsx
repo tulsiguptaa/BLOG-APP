@@ -23,7 +23,6 @@ const Footer = () => {
                 <div className="footer-links">
                     <Link to="/" className="footer-link">Home</Link>
                     <Link to="/blog" className="footer-link">Blog</Link>
-                    <Link to="/about" className="footer-link">About</Link>
                     <a href="mailto:contact@devdiary.com" className="footer-link">Contact</a>
                 </div>
             </div>

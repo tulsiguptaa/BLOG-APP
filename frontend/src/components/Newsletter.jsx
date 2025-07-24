@@ -14,6 +14,7 @@ const Newsletter = () => {
         }
     };
 
+
     return (
         <div className="newsletter-container">
             <h3 className="newsletter-title">Subscribe to our Newsletter</h3>
