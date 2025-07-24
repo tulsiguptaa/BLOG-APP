@@ -34,7 +34,7 @@
 .login-field label {
     margin-bottom: 6px;
     font-size: 1rem;
-    color: #d6d3d3;
+    color: #f0eaea;
 }
 
 .login-input {
@@ -64,6 +64,7 @@
     text-align: center;
 }
 
+
 .login-button {
     padding: 12px 0;
     background: linear-gradient(90deg, #4f8cff 0%, #2355e6 100%);
@@ -81,4 +82,137 @@
 .login-button:focus {
     background: linear-gradient(90deg, #2355e6 0%, #4f8cff 100%);
     box-shadow: 0 4px 16px rgba(79, 140, 255, 0.12);
+}
+
+.comment-item {
+    background: #f4f8fb;
+    color: #222;
+    border: 1.5px solid #dbeafe;
+    padding: 18px 18px 12px 18px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px 0 rgba(49, 199, 230, 0.07);
+    margin-bottom: 22px;
+    transition: box-shadow 0.18s, border-color 0.18s;
+}
+
+.comment-item:hover {
+    box-shadow: 0 4px 18px 0 rgba(49, 199, 230, 0.13);
+    border-color: #31c7e6;
+}
+
+.comment-item .comment-username {
+    font-weight: 700;
+    color: #1976d2;
+    font-size: 1.08rem;
+    margin-bottom: 2px;
+}
+
+.comment-item .comment-content {
+    margin: 8px 0 6px 0;
+    color: #222;
+    font-size: 1.01rem;
+    line-height: 1.5;
+}
+
+.comment-item .comment-date {
+    font-size: 0.93rem;
+    color: #7b8a99;
+    font-style: italic;
+    text-align: right;
+}
+
+.comments-section {
+    margin-top: 32px;
+}
+
+.comments-divider {
+    margin: 32px 0 24px 0;
+    border: none;
+    border-top: 1.5px solid #e0e0e0;
+    width: 100%;
+}
+
+.comment-form {
+    background: #f8fafc;
+    color: #222;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 28px 24px 20px 24px;
+    box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.07);
+    max-width: 520px;
+    margin: 36px auto 24px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: stretch;
+}
+
+.comment-form-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #1976d2;
+    letter-spacing: 0.5px;
+    text-align: left;
+}
+
+.comment-form .login-field label {
+    color: #333;
+    font-weight: 500;
+}
+
+.comment-form .login-input,
+.comment-form textarea {
+    background: #fff;
+    color: #222;
+    border: 1.5px solid #bfc9d1;
+    border-radius: 6px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    font-size: 1rem;
+    padding: 10px 12px;
+}
+
+.comment-form .login-input:focus,
+.comment-form textarea:focus {
+    border-color: #1976d2;
+    box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.10);
+    outline: none;
+}
+
+.comment-form .login-button {
+    margin-top: 10px;
+    background: linear-gradient(90deg, #1976d2 0%, #31c7e6 100%);
+    color: #fff;
+    font-size: 1.08rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 12px 0;
+    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
+    transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+}
+
+.comment-form .login-button:hover,
+.comment-form .login-button:focus {
+    background: linear-gradient(90deg, #31c7e6 0%, #1976d2 100%);
+    box-shadow: 0 4px 16px rgba(25, 118, 210, 0.12);
+    transform: translateY(-1px) scale(1.01);
+}
+
+@media (max-width: 600px) {
+    .comment-form {
+        padding: 16px 6vw 12px 6vw;
+        max-width: 98vw;
+    }
+}
+
+.comment-form .login-error {
+    color: #2196f3;
+    background: #e3f2fd;
+    border: 1px solid #2196f3;
+}
+
+.login-comment {
+    color: #f0eaea;
 }

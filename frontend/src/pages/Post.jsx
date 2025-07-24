@@ -5,13 +5,20 @@ import Footer from "../components/Footer";
 import "./Login.css";
 
 const Post = () => {
-    const { id } = useParams(); 
+    const { id } = useParams();
     const navigate = useNavigate();
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
+    const [comments, setComments] = useState([]);
+    const [commentsLoading, setCommentsLoading] = useState(false);
+    const [commentsError, setCommentsError] = useState("");
+    const [commentUsername, setCommentUsername] = useState("");
+    const [commentContent, setCommentContent] = useState("");
+    const [commentSubmitting, setCommentSubmitting] = useState(false);
+    const [commentSuccess, setCommentSuccess] = useState("");
 
     useEffect(() => {
         if (id) {
@@ -24,6 +31,13 @@ const Post = () => {
                 })
                 .catch(() => setError("Failed to load post."))
                 .finally(() => setLoading(false));
+            // Fetch comments
+            setCommentsLoading(true);
+            fetch(`http://localhost:5000/posts/${id}/comments`)
+                .then(res => res.json())
+                .then(data => setComments(data))
+                .catch(() => setCommentsError("Failed to load comments."))
+                .finally(() => setCommentsLoading(false));
         }
     }, [id]);
 
@@ -63,7 +77,7 @@ const Post = () => {
             if (!res.ok) {
                 if (res.status === 401) {
                     setError("Session expired. Please log in again.");
-                    localStorage.removeItem('token'); 
+                    localStorage.removeItem('token');
                     setTimeout(() => navigate("/login"), 1500);
                 } else {
                     setError(data.error || "Failed to save post.");
@@ -105,6 +119,44 @@ const Post = () => {
             setError(err.message);
         } finally {
             setLoading(false);
+        }
+    };
+
+    const handleCommentSubmit = async (e) => {
+        e.preventDefault();
+        setCommentsError("");
+        setCommentSuccess("");
+        if (!commentContent) {
+            setCommentsError("Please enter a comment.");
+            return;
+        }
+        setCommentSubmitting(true);
+        try {
+            const res = await fetch(`http://localhost:5000/posts/${id}/comments`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username: commentUsername, content: commentContent })
+            });
+            const data = await res.json();
+            if (!res.ok) {
+                setCommentsError(data.error || "Failed to add comment.");
+                setCommentSubmitting(false);
+                return;
+            }
+            setCommentSuccess("Comment added!");
+            setCommentUsername("");
+            setCommentContent("");
+            // Refresh comments
+            setCommentsLoading(true);
+            fetch(`http://localhost:5000/posts/${id}/comments`)
+                .then(res => res.json())
+                .then(data => setComments(data))
+                .catch(() => setCommentsError("Failed to load comments."))
+                .finally(() => setCommentsLoading(false));
+        } catch (err) {
+            setCommentsError(err.message);
+        } finally {
+            setCommentSubmitting(false);
         }
     };
 
@@ -156,6 +208,61 @@ const Post = () => {
                 </form>
             </div>
             <Footer />
+            {/* Comments Section (only show if editing/viewing a post) */}
+            {id && (
+                <div className="login-container comments-section">
+                    <h3 style={{ marginBottom: 12 }}>Comments</h3>
+                    {commentsLoading ? (
+                        <div>Loading comments...</div>
+                    ) : commentsError ? (
+                        <div className="login-error">{commentsError}</div>
+                    ) : comments.length === 0 ? (
+                        <div>No comments yet.</div>
+                    ) : (
+                        <ul style={{ padding: 0, listStyle: "none" }}>
+                            {comments.map(c => (
+                                <li key={c.id} className="comment-item">
+                                    <div className="comment-username">{c.username || "Anonymous"}</div>
+                                    <div className="comment-content">{c.content}</div>
+                                    <div className="comment-date">{new Date(c.created_at).toLocaleString()}</div>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                    <hr className="comments-divider" />
+                    <form className="login-form comment-form" onSubmit={handleCommentSubmit}>
+                        <div className="comment-form-title">Add a Comment</div>
+                        <div className="login-field">
+                            <label htmlFor="comment-username">Name (optional):</label>
+                            <input
+                                type="text"
+                                id="comment-username"
+                                value={commentUsername}
+                                onChange={e => setCommentUsername(e.target.value)}
+                                className="login-input"
+                                placeholder="Your name (optional)"
+                            />
+                        </div>
+                        <div className="login-field">
+                            <label htmlFor="comment-content" className="login-comment">Comment:</label>
+                            <textarea
+                                id="comment-content"
+                                value={commentContent}
+                                onChange={e => setCommentContent(e.target.value)}
+                                className="login-input"
+                                rows={3}
+                                required
+                                style={{ resize: "vertical", minHeight: 60 }}
+                            />
+                        </div>
+                        {commentsError && <div className="login-error">{commentsError}</div>}
+                        {commentSuccess && <div className="login-error">{commentSuccess}</div>}
+                        <button type="submit" className="login-button" disabled={commentSubmitting}>
+                            {commentSubmitting ? "Posting..." : "Add Comment"}
+                        </button>
+                    </form>
+                </div>
+            )}
         </>
     );
 };
