@@ -13,7 +13,6 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Home />}></Route>
         <Route path='/blog' element={<Blog />}></Route>
-         {/* <Route path="/blog/:id" element={<BlogPost />} /> This handles /blog/1 */}
       
         <Route path='/login' element={<Login />}></Route>
         <Route path='/register' element={<Register />}></Route>

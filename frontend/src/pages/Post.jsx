@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 import "./Login.css";
 
 const Post = () => {
-    const { id } = useParams(); // If editing, id will be present
+    const { id } = useParams(); 
     const navigate = useNavigate();
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
@@ -63,7 +63,7 @@ const Post = () => {
             if (!res.ok) {
                 if (res.status === 401) {
                     setError("Session expired. Please log in again.");
-                    localStorage.removeItem('token'); // Clear invalid token
+                    localStorage.removeItem('token'); 
                     setTimeout(() => navigate("/login"), 1500);
                 } else {
                     setError(data.error || "Failed to save post.");

@@ -6,9 +6,7 @@
   font-style: normal;
 }
 
-/* ::-webkit-scrollbar{
-  display: none;
-} */
+
 body{
   color:rgb(0, 0, 0);
   min-height: 100vh;
