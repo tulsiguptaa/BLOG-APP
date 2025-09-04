@@ -1,0 +1,107 @@
+.login-container {
+    max-width: 420px;
+    margin: 64px auto;
+    padding: 36px 30px;
+    background: linear-gradient(120deg, #23283a 60%, #61dafb 100%);
+    border-radius: 14px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10), 0 1.5px 4px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-title {
+    margin-bottom: 26px;
+    font-size: 2.1rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+.login-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-field {
+    margin-bottom: 22px;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-field label {
+    margin-bottom: 7px;
+    font-size: 1.05rem;
+    color: #e0f7fa;
+    font-weight: 500;
+}
+
+.login-input {
+    padding: 11px 13px;
+    border: 1.5px solid #d1d5db;
+    border-radius: 7px;
+    font-size: 1.01rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+    background: #fafbfc;
+}
+
+.login-input:focus {
+    border-color: #61dafb;
+    box-shadow: 0 0 0 2px rgba(97, 218, 251, 0.13);
+    background: #fff;
+}
+
+.login-error {
+    color: #e74c3c;
+    background: #fff0f0;
+    border: 1px solid #ffd6d6;
+    border-radius: 5px;
+    padding: 8px 12px;
+    margin-bottom: 16px;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.register-success {
+    color: #61dafb;
+    background: #23283a;
+    border: 1px solid #61dafb;
+    border-radius: 5px;
+    padding: 8px 12px;
+    margin-bottom: 16px;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.login-button {
+    padding: 13px 0;
+    background: linear-gradient(90deg, #61dafb 60%, #2355e6 100%);
+    color: #181c24;
+    font-size: 1.12rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(97, 218, 251, 0.10);
+}
+
+.login-button:hover,
+.login-button:focus {
+    background: linear-gradient(90deg, #2355e6 0%, #61dafb 100%);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(97, 218, 251, 0.15);
+}
+
+@media (max-width: 600px) {
+    .login-container {
+        padding: 18px 4vw;
+        max-width: 98vw;
+    }
+
+    .login-title {
+        font-size: 1.3rem;
+    }
+}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Login.css";
+import "./Register.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
@@ -96,7 +96,7 @@ const Register = () => {
                         />
                     </div>
                     {error && <div className="login-error">{error}</div>}
-                    {success && <div className="login-error" style={{ color: '#61dafb', background: '#23283a', border: '1px solid #61dafb' }}>{success}</div>}
+                    {success && <div className="register-success">{success}</div>}
                     <button type="submit" className="login-button">Register</button>
                 </form>
             </div>

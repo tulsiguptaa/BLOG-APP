@@ -31,7 +31,7 @@ const Post = () => {
                 })
                 .catch(() => setError("Failed to load post."))
                 .finally(() => setLoading(false));
-          
+
             setCommentsLoading(true);
             fetch(`http://localhost:5000/posts/${id}/comments`)
                 .then(res => res.json())
@@ -146,7 +146,7 @@ const Post = () => {
             setCommentSuccess("Comment added!");
             setCommentUsername("");
             setCommentContent("");
-     
+
             setCommentsLoading(true);
             fetch(`http://localhost:5000/posts/${id}/comments`)
                 .then(res => res.json())
@@ -207,7 +207,6 @@ const Post = () => {
                     )}
                 </form>
             </div>
-            <Footer /> 
             {id && (
                 <div className="login-container comments-section">
                     <h3 style={{ marginBottom: 12 }}>Comments</h3>
@@ -262,6 +261,7 @@ const Post = () => {
                     </form>
                 </div>
             )}
+            <Footer />
         </>
     );
 };

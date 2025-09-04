@@ -10,6 +10,7 @@ const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
@@ -20,6 +21,7 @@ const Login = () => {
             return;
         }
         setError("");
+        setSuccess("");
         setLoading(true);
         try {
             const res = await fetch("http://localhost:5000/auth/login", {
@@ -34,7 +36,7 @@ const Login = () => {
                 localStorage.setItem("token", data.token);
                 const decoded = jwtDecode(data.token);
                 localStorage.setItem("user_id", decoded.sub);
-                setError("");
+                setSuccess("Login successful!");
                 navigate("/");
             }
         } catch (err) {
@@ -73,6 +75,7 @@ const Login = () => {
                         />
                     </div>
                     {error && <div className="login-error">{error}</div>}
+                    {success && <div className="login-success">{success}</div>}
                     <button type="submit" className="login-button" disabled={loading}>{loading ? "Logging in..." : "Login"}</button>
                 </form>
             </div>

@@ -3,7 +3,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 0.75rem 2rem;
-    background: #181c24;
+    background: rgb(24, 28, 36);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
     position: sticky;
     top: 0;
